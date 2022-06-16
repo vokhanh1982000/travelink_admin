@@ -1,0 +1,56 @@
+<nz-card>
+    <div class="row m-b-30">
+        <div class=" text-right">
+            <a nz-button nzType="primary" (click)="showModal()">
+                <i nz-icon nzType="plus-circle" theme="outline"></i>
+                <span>Add category</span>
+            </a>
+        </div>
+    </div>
+
+    <nz-modal
+      [(nzVisible)]="isVisible"
+      nzTitle="Add Category"
+      [nzOkLoading]="isOkLoading"
+      (nzOnCancel)="handleCancel()"
+      (nzOnOk)="onAddCategory()"
+    >
+      <div *nzModalContent>
+        <form [formGroup]="categoryForm">
+            <!-- <input formControlName="name"/> -->
+            <nz-form-item>
+                <nz-form-label>Name category</nz-form-label>
+                <nz-form-control>
+                  <input nz-input formControlName="name" placeholder="Category Name" />
+                </nz-form-control>
+              </nz-form-item>
+            </form>
+        </div>
+    </nz-modal>
+    <nz-table #productsListTable [nzData]="displayData">
+        <thead>
+            <tr>
+                <th *ngFor="let column of orderColumn" [nzSortFn]="column.compare">{{ column.title }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of productsListTable.data;  let i=index">
+                <td>#{{item.id}}</td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <!-- <nz-avatar nzShape="square" [nzSize]="60" nzIcon="picture" [nzSrc]="item.avatar"></nz-avatar> -->
+                        <span class="m-l-10">{{item.name}}</span>
+                    </div>
+                </td>
+                <td class="text-md-center">
+                    <!-- <a class="m-r-5" nz-button nzType="default" nzShape="circle" nz-tooltip nzTooltipTitle="Edit" >
+                        <i nz-icon nzType="edit" theme="outline"></i>
+                    </a> -->
+                    <button nz-button nzType="default" nzShape="circle" nz-tooltip nzTooltipTitle="Delete" nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(item.id)">
+                        <i nz-icon nzType="delete" theme="outline"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</nz-card>

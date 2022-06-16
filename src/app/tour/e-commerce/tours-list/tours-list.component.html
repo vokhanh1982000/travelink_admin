@@ -1,0 +1,79 @@
+<nz-card>
+    <div class="row m-b-30">
+        <div class="col-lg-8">
+            <div class="d-md-flex">
+                <div class="m-b-10 m-r-20">
+                    <nz-input-group [nzPrefix]="prefixTemplate">
+                        <input type="text" nz-input placeholder="Search Project" [(ngModel)]="searchInput" (ngModelChange)="search()">
+                    </nz-input-group>      
+                    <ng-template #prefixTemplate>
+                        <i nz-icon nzType="search" class="opacity-05"></i>
+                    </ng-template>   
+                </div>
+                <div class="m-b-10 m-r-20 d-flex align-items-center">
+                    <nz-select style="min-width: 220px;" class="w-100" nzPlaceHolder="Category" [(ngModel)]="selectedCategory" (ngModelChange)="addressChange($event)">
+                        <nz-option nzLabel="All" nzValue="All"></nz-option>
+                        <nz-option nzLabel="Home Decoration" nzValue="Home Decoration"></nz-option>
+                        <nz-option nzLabel="Eletronic" nzValue="Eletronic"></nz-option>
+                        <nz-option nzLabel="Jewellery" nzValue="Jewellery"></nz-option>
+                    </nz-select>
+                </div>
+            </div>          
+        </div>
+        <div class="col-lg-4 text-right">
+            <a nz-button nzType="primary">
+                <i nz-icon nzType="plus-circle" theme="outline"></i>
+                <span>Add Tour</span>
+            </a>
+        </div>
+    </div>
+    <nz-table #productsListTable [nzData]="displayData">
+        <thead>
+            <tr>
+                <th *ngFor="let column of orderColumn" [nzSortFn]="column.compare">{{ column.title }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of productsListTable.data;  let i=index">
+                <!-- <td>#{{item.id}}</td> -->
+                <td>
+                    <div class="d-flex align-items-center">
+                        
+                            <nz-avatar nzShape="square" [nzSize]="60" nzIcon="picture" [nzSrc]="item.images[0].image"></nz-avatar>
+                        
+                        
+                        <span class="m-l-10">{{item.name}}</span>
+                    </div>
+                </td>
+                <td>
+                    <p *ngFor="let category of item.categories">
+                    {{ category.name }} </p>
+                </td>
+                <td>{{item.price | number:'3.0-5'}}VND</td>
+                <td>
+                    {{item.address}}
+                </td>
+                <td>
+                    <!-- <nz-badge *ngIf="item.status == 'in stock'" nzStatus="success"></nz-badge>
+                    <nz-badge *ngIf="item.status == 'out of stock'" nzStatus="error"></nz-badge>
+                    <span class="text-capitalize">{{item.status}}</span> -->
+                    {{item.region}}
+                </td>
+                <td>
+                    {{item.schedule}}
+                </td>
+                <td>
+                    {{item.description}}
+                </td>
+                <td class="text-md-right">
+                    <a class="m-r-5" nz-button nzType="default" nzShape="circle" nz-tooltip nzTooltipTitle="Info" (click)="goInfo(item.id)">
+                        <i nz-icon nzType="eye" theme="outline"></i>
+                    </a>
+                    <button nz-button nzType="default" nzShape="circle" nz-tooltip nzTooltipTitle="Delete" nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteRow(item.id)">
+                        <i nz-icon nzType="delete" theme="outline"></i>
+                    </button>
+                </td>          
+            </tr>
+        </tbody>
+    </nz-table>
+</nz-card>

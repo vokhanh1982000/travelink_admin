@@ -1,0 +1,213 @@
+<h2 class="font-weight-normal">Add tour</h2>
+<form (ngSubmit)="onAddTour(f)" #f="ngForm">
+  <nz-card nzTitle="Tour">
+    <div class="media align-items-center">
+      <nz-avatar [nzSize]="80" [nzSrc]="avatarUrl"></nz-avatar>
+      <div class="m-l-20 m-r-20">
+        <nz-form-item>
+          <nz-form-label>Image</nz-form-label>
+          <nz-form-control>
+            <input nz-input ngModel name="image" placeholder="Image URL" (ngModelChange)="handleChange($event)"/>
+          </nz-form-control>
+        </nz-form-item>
+        <!-- <nz-upload
+        nzName="avatar"
+        [nzShowUploadList]="false"
+        (nzChange)="handleChange($event)"
+      >
+        
+      </nz-upload> -->
+      </div>
+    </div>
+    <hr class="m-v-25" />
+    <div class="row">
+      <div class="col-md-4">
+        <nz-form-item>
+          <nz-form-label>Tour name</nz-form-label>
+          <nz-form-control>
+            <input nz-input ngModel name="name" placeholder="Tour name" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div class="col-md-4">
+        <nz-form-item>
+          <nz-form-label>Address</nz-form-label>
+          <nz-form-control>
+            <nz-select
+              class="w-100"
+              [(ngModel)]="selectedAddress"
+              nzPlaceHolder="Address"
+              name="address"
+            >
+              <nz-option nzValue="Đà Nẵng" nzLabel="Đà Nẵng"></nz-option>
+              <nz-option nzValue="Nha Trang" nzLabel="Nha Trang"></nz-option>
+              <nz-option nzValue="Đà Lạt" nzLabel="Đà Lạt"></nz-option>
+              <nz-option nzValue="Vũng Tàu" nzLabel="Vũng Tàu"></nz-option>
+              <nz-option nzValue="Phú Quốc" nzLabel="Phú Quốc"></nz-option>
+              <nz-option nzValue="Bình Định" nzLabel="Bình Định"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div class="col-md-4">
+        <nz-form-item>
+          <nz-form-label>Region</nz-form-label>
+          <nz-form-control>
+            <nz-select
+              class="w-100"
+              [(ngModel)]="selectedRegion"
+              nzPlaceHolder="Region"
+              name="region"
+            >
+              <nz-option nzValue="Miền Bắc" nzLabel="Miền Bắc"></nz-option>
+              <nz-option nzValue="Miền Trung" nzLabel="Miền Trung"></nz-option>
+              <nz-option nzValue="Miền Nam" nzLabel="Miền Nam"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <nz-form-item>
+          <nz-form-label>Schedule</nz-form-label>
+          <nz-form-control>
+            <input ngModel name="schedule" nz-input placeholder="Schedule" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div class="col-md-4">
+        <nz-form-item>
+          <nz-form-label>Duration</nz-form-label>
+          <nz-form-control>
+            <nz-input-number
+            ngModel
+            name="duration"
+              [nzMin]="1"
+              [nzMax]="5"
+              [nzStep]="1"
+              placeholder="Duration"
+            ></nz-input-number>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div class="col-md-4">
+        <nz-form-item>
+          <nz-form-label>Price</nz-form-label>
+          <nz-form-control>
+            <input nz-input ngModel name="price" type="number" placeholder="Price" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <nz-form-item>
+          <nz-form-label>Categories</nz-form-label>
+          <nz-form-control>
+            <nz-select
+              name="categories"
+              nzMode="multiple"
+              nzPlaceHolder="Categories"
+              [(ngModel)]="listOfSelectedValue"
+            >
+              <nz-option
+                *ngFor="let item of categories"
+                [nzLabel]="item.name"
+                [nzValue]="item.name"
+              ></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div class="col-md-8">
+        <nz-form-item>
+          <nz-form-label>Description</nz-form-label>
+          <nz-form-control>
+            <textarea nz-input ngModel name="description" placeholder="Description" ></textarea>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+  </nz-card>
+  <!-- <nz-card nzTitle="Sub Tour">
+    <form nz-form [formGroup]="changePWForm" (ngSubmit)="submitForm()">
+      <div class="row">
+        <div class="col-md-6">
+          <nz-form-item>
+            <nz-form-label>Time</nz-form-label>
+            <nz-form-control>
+              <nz-range-picker
+                class="w-100"
+                nzFormat="yyyy/MM/dd"
+                nzPlaceHolder="Time"
+              ></nz-range-picker>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div class="col-md-4">
+            <nz-form-item>
+              <nz-form-label>Slot</nz-form-label>
+              <nz-form-control>
+                <nz-input-number
+                  [nzMin]="1"
+                  [nzMax]="8"
+                  [nzStep]="1"
+                  placeholder="Slot"
+                ></nz-input-number>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+      </div>
+    </form>
+  </nz-card>
+  <nz-card nzTitle="Tranportation">
+    <div class="row">
+      <div class="col-md-4">
+        <nz-form-item>
+          <nz-form-label>Vehicle</nz-form-label>
+          <nz-form-control>
+            <nz-select
+              class="w-100"
+              [(ngModel)]="selectedVehicle"
+              nzPlaceHolder="Vehicle"
+            >
+              <nz-option nzValue="Máy bay" nzLabel="Máy bay"></nz-option>
+              <nz-option nzValue="Tàu hỏa" nzLabel="Tàu hỏa"></nz-option>
+              <nz-option nzValue="Xe khách" nzLabel="Xe khách"></nz-option>
+              <nz-option nzValue="Xe giường nằm" nzLabel="Xe giường nằm"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div class="col-md-4">
+        <nz-form-item>
+          <nz-form-label>Price</nz-form-label>
+          <nz-form-control>
+            <input nz-input type="number" placeholder="Price" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div class="col-md-4">
+        <nz-form-item>
+          <nz-form-label>Start from</nz-form-label>
+          <nz-form-control>
+            <nz-select
+              class="w-100"
+              [(ngModel)]="selectedStartForm"
+              nzPlaceHolder="Start from"
+            >
+              <nz-option nzValue="Máy bay" nzLabel="Máy bay"></nz-option>
+              <nz-option nzValue="Tàu hỏa'" nzLabel="Tàu hỏa'"></nz-option>
+              <nz-option nzValue="Xe khách" nzLabel="Xe khách"></nz-option>
+              <nz-option nzValue="Xe giường nằm" nzLabel="Xe giường nằm"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+  </nz-card> -->
+  <button nz-button nzType="primary" type="submit" [disabled]="!f.valid">
+    Save
+  </button>
+</form>

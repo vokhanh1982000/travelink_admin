@@ -12,7 +12,7 @@ import { LoginComponent } from './login/login.component'
 const appRoutes: Routes = [
     {
         path: '',
-        redirectTo: '/dashboard/turnover',
+        redirectTo: '/dashboard',
         pathMatch: 'full',
     },
     { 

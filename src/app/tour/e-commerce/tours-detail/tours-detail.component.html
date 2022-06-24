@@ -36,7 +36,7 @@
 <nz-tabset class="page-header-tab" *ngIf="!isEdit">
   <nz-tab nzTitle="Overview">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-4">
         <nz-card>
           <div class="media align-items-center">
             <i
@@ -46,13 +46,13 @@
               theme="outline"
             ></i>
             <div class="m-l-15">
-              <p class="m-b-0 text-muted">10 ratings</p>
+              <p class="m-b-0 text-muted">Ratings</p>
               <nz-rate [ngModel]="4.5" nzDisabled></nz-rate>
             </div>
           </div>
         </nz-card>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-4">
         <nz-card>
           <div class="media align-items-center">
             <i
@@ -63,12 +63,12 @@
             ></i>
             <div class="m-l-15">
               <p class="m-b-0 text-muted">Orders</p>
-              <h3 class="m-b-0 ls-1">500</h3>
+              <h3 class="m-b-0 ls-1">{{displayData.stat.orderCount}}</h3>
             </div>
           </div>
         </nz-card>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-4">
         <nz-card>
           <div class="media align-items-center">
             <i
@@ -78,24 +78,8 @@
               theme="outline"
             ></i>
             <div class="m-l-15">
-              <p class="m-b-0 text-muted">Reviews</p>
-              <h3 class="m-b-0 ls-1">27</h3>
-            </div>
-          </div>
-        </nz-card>
-      </div>
-      <div class="col-md-3">
-        <nz-card>
-          <div class="media align-items-center">
-            <i
-              class="font-size-40 text-primary"
-              nz-icon
-              nzType="stock"
-              theme="outline"
-            ></i>
-            <div class="m-l-15">
-              <p class="m-b-0 text-muted">Available Stock</p>
-              <h3 class="m-b-0 ls-1">152</h3>
+              <p class="m-b-0 text-muted">Customers</p>
+              <h3 class="m-b-0 ls-1">{{displayData.stat.customer}}</h3>
             </div>
           </div>
         </nz-card>
@@ -242,7 +226,7 @@
                 ></nz-input-number>
               </nz-form-control>
             </nz-form-item>
-            <nz-form-item>
+            <!-- <nz-form-item>
               <nz-form-label>Slot</nz-form-label>
               <nz-form-control>
                 <nz-select ngModel="lucy">
@@ -255,7 +239,7 @@
                   ></nz-option>
                 </nz-select>
               </nz-form-control>
-            </nz-form-item>
+            </nz-form-item> -->
           </form>
         </div>
       </nz-modal>
@@ -269,7 +253,7 @@
         <div *nzModalContent>
           <form [formGroup]="tranForm">
             <!-- <input formControlName="name"/> -->
-            <nz-form-item>
+            <nz-form-item hidden="true">
               <nz-form-label>Id sub tour</nz-form-label>
               <nz-form-control>
                 <input
@@ -312,6 +296,8 @@
                     nzValue="Bình Định"
                     nzLabel="Bình Định"
                   ></nz-option>
+                  <nz-option nzValue="Hồ Chí Minh" nzLabel="Hồ Chí Minh"></nz-option>
+                  <nz-option nzValue="Hà Nội" nzLabel="Hà Nội"></nz-option>
                 </nz-select>
               </nz-form-control>
             </nz-form-item>

@@ -2,28 +2,13 @@ import { SideNavInterface } from '../../interfaces/side-nav.type';
 
 export const ROUTES: SideNavInterface[] = [
     {
-        path: '',
+        path: '/dashboard',
         title: 'Dashboard',
         iconType: 'nzIcon',
         iconTheme: 'outline',
         icon: 'line-chart',
         submenu: [
-            {
-                path: '/dashboard/turnover',
-                title: 'Turnover',
-                iconType: '',
-                icon: '',
-                iconTheme: '',
-                submenu: []
-            },
-            {
-                path: '/dashboard/top-order',
-                title: 'Top order',
-                iconType: '',
-                icon: '',
-                iconTheme: '',
-                submenu: []
-            }
+            
         ]
     },
     {

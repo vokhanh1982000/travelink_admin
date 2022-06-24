@@ -1,12 +1,14 @@
 import { Component } from '@angular/core'
 import { ThemeConstantService } from '../../shared/services/theme-constant.service';
+import { DashboardService } from '../dashboard.service';
 
 @Component({
     templateUrl: './default-dashboard.component.html'
 })
 
 export class DefaultDashboardComponent {
-
+    displayData: any;
+    topTours = [];
     themeColors = this.colorConfig.get().colors;
     blue = this.themeColors.blue;
     blueLight = this.themeColors.blueLight;
@@ -19,7 +21,26 @@ export class DefaultDashboardComponent {
 
     taskListIndex: number = 0;
 
-    constructor( private colorConfig:ThemeConstantService ) {}
+    constructor( private colorConfig:ThemeConstantService, private dashboardService : DashboardService ) {}
+
+    ngOnInit(): void {
+        this.getInfo()
+    }
+
+    getInfo() {
+        this.dashboardService.getInfo().subscribe({
+          next:(res) =>  {
+            this.displayData = res
+            this.topTours = res.topTours
+            console.log(res.topTours)
+            console.log(res)
+          },
+          error:(err)=>{
+            
+          }
+        })
+      }
+
 
     revenueChartFormat: string = 'revenueMonth';
 
@@ -167,216 +188,4 @@ export class DefaultDashboardComponent {
             barPercentage: 0.3,
         }
     ];
-
-    productsList = [
-        {
-            name: 'Du lịch Đà Nẵng',
-            avatar: '',
-            earn: 1912,
-            sales: 81,
-            stock: 82,
-        },
-        {
-            name: 'Du lịch Phú Quốc',
-            avatar: '',
-            earn: 1377,
-            sales: 26,
-            stock: 61
-        },
-        {
-            name: 'Du lịch Vũng Tàu',
-            avatar: '',
-            earn: 9212,
-            sales: 71,
-            stock: 23,
-        },
-        {
-            name: 'Du lịch Bình Định',
-            avatar: '',
-            earn: 1298,
-            sales: 79,
-            stock: 54,
-        },
-        {
-            name: 'Du lịch Đà Lạt',
-            avatar: '',
-            earn: 7376,
-            sales: 60,
-            stock: 76,
-        }
-    ]    
-
-    fileList = [
-        {
-            icon: "file-word",
-            name: "Documentation.doc",
-            color: this.blue,
-            size: "1.2MB"
-        },
-        {
-            icon: "file-excel",
-            name: "Expensess.xls",
-            color: this.cyan,
-            size: "518KB"
-        },
-        {
-            icon: "file-text",
-            name: "Receipt.txt",
-            color: this.purple,
-            size: "355KB"
-        },
-        {
-            icon: "file-word",
-            name: "Project Requirement.doc",
-            color: this.blue,
-            size: "1.6MB"
-        },
-        {
-            icon: "file-pdf",
-            name: "App Flow.pdf",
-            color: this.red,
-            size: "19.8MB"
-        },
-        {
-            icon: "file-ppt",
-            name: "Presentation.ppt",
-            color: this.gold,
-            size: "2.7MB"
-        },
-    ]
-
-    activityList = [
-        {
-            name: "Virgil Gonzales",
-            avatar: this.blue,
-            date: "10:44 PM",
-            action: "Complete task",
-            target: "Prototype Design",
-            actionType: "completed"
-        },
-        {
-            name: "Lilian Stone",
-            avatar: this.cyan,
-            date: "8:34 PM",
-            action: "Attached file",
-            target: "Mockup Zip",
-            actionType: "upload"
-        },
-        {
-            name: "Erin Gonzales",
-            avatar: this.gold,
-            date: "8:34 PM",
-            action: "Commented",
-            target: "'This is not our work!'",
-            actionType: "comment"
-        },
-        {
-            name: "Riley Newman",
-            avatar: this.blue,
-            date: "8:34 PM",
-            action: "Commented",
-            target: "'Hi, please done this before tommorow'",
-            actionType: "comment"
-        },
-        {
-            name: "Pamela Wanda",
-            avatar: this.red,
-            date: "8:34 PM",
-            action: "Removed",
-            target: "a file",
-            actionType: "removed"
-        },
-        {
-            name: "Marshall Nichols",
-            avatar: this.purple,
-            date: "5:21 PM",
-            action: "Create",
-            target: "this project",
-            actionType: "created"
-        }
-    ]    
-
-    taskListToday = [
-        {
-            title: "Define users and workflow",
-            desc: "A cheeseburger is more than sandwich",
-            checked: false
-        },
-        {
-            title: "Schedule jobs",
-            desc: "I'm gonna build me an airport",
-            checked: true
-        },
-        {
-            title: "Extend the data model",
-            desc: "Let us wax poetic about cheeseburger.",
-            checked: true
-        },
-        {
-            title: "Change interface",
-            desc: "Efficiently unleash cross-media information",
-            checked: false
-        },
-        {
-            title: "Create databases",
-            desc: "Here's the story of a man named Brady",
-            checked: false
-        }
-    ];
-    
-    taskListWeek = [
-        {
-            title: "Verify connectivity",
-            desc: "Bugger bag egg's old boy willy jolly",
-            checked: false
-        },
-        {
-            title: "Order console machines",
-            desc: "Value proposition alpha crowdsource",
-            checked: false
-        },
-        {
-            title: "Customize Template",
-            desc: "Do you see any Teletubbies in here",
-            checked: true
-        },
-        {
-            title: "Batch schedule",
-            desc: "Trillion a very small stage in a vast",
-            checked: true
-        },
-        {
-            title: "Prepare implementation",
-            desc: "Drop in axle roll-in rail slide",
-            checked: true
-        }
-    ];
-
-    taskListMonth = [
-        {
-            title: "Create user groups",
-            desc: "Nipperkin run a rig ballast chase",
-            checked: false
-        },
-        {
-            title: "Design Wireframe",
-            desc: "Value proposition alpha crowdsource",
-            checked: true
-        },
-        {
-            title: "Project Launch",
-            desc: "I'll be sure to note that",
-            checked: false
-        },
-        {
-            title: "Management meeting",
-            desc: "Hand-crafted exclusive finest",
-            checked: false
-        },
-        {
-            title: "Extend data model",
-            desc: "European minnow priapumfish mosshead",
-            checked: true
-        }
-    ]
 }  

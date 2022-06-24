@@ -1,0 +1,24 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { baseUrl } from 'src/environments/environment';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DashboardService {
+
+  constructor(private http : HttpClient) { }
+
+  user = localStorage.getItem("user")
+
+  getInfo(){
+    const token = this.user ? JSON.parse(this.user).token : ""
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'Bearer ' + token
+      })
+    };
+    return this.http.get<any>(`${baseUrl}/tour/statistic`, httpOptions);
+  }
+}

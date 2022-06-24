@@ -1,16 +1,16 @@
 <div class="row">
-    <div class="col-md-6 col-lg-3">
+    <div class="col-md-6 col-lg-4">
         <nz-card>
             <div class="media align-items-center">
                 <nz-avatar [nzSize]="60" nzIcon="dollar" class="ant-avatar-blue"  ></nz-avatar>
                 <div class="m-l-15">
-                    <h2 class="m-b-0">$23,523</h2>
+                    <h2 class="m-b-0">{{displayData.profit | number:'3.0-5'}}VND</h2>
                     <p class="m-b-0 text-muted">Profit</p>
                 </div>
             </div>
         </nz-card>
     </div>
-    <div class="col-md-6 col-lg-3">
+    <!-- <div class="col-md-6 col-lg-3">
         <nz-card>
             <div class="media align-items-center">
                 <nz-avatar [nzSize]="50" nzIcon="line-chart" class="ant-avatar-cyan"  ></nz-avatar>
@@ -20,31 +20,31 @@
                 </div>
             </div>
         </nz-card>
-    </div>
-    <div class="col-md-6 col-lg-3">
+    </div> -->
+    <div class="col-md-6 col-lg-4">
         <nz-card>
             <div class="media align-items-center">
                 <nz-avatar [nzSize]="50" nzIcon="profile" class="ant-avatar-gold"  ></nz-avatar>
                 <div class="m-l-15">
-                    <h2 class="m-b-0">3,685</h2>
+                    <h2 class="m-b-0">{{displayData.totalOrder}}</h2>
                     <p class="m-b-0 text-muted">Orders</p>
                 </div>
             </div>
         </nz-card>
     </div>
-    <div class="col-md-6 col-lg-3">
+    <div class="col-md-6 col-lg-4">
         <nz-card>
             <div class="media align-items-center">
                 <nz-avatar [nzSize]="50" nzIcon="user" class="ant-avatar-purple"  ></nz-avatar>
                 <div class="m-l-15">
-                    <h2 class="m-b-0">1,832</h2>
+                    <h2 class="m-b-0">{{displayData.customer}}</h2>
                     <p class="m-b-0 text-muted">Customers</p>
                 </div>
             </div>
         </nz-card>
     </div>
 </div>
-<div class="row">
+<!-- <div class="row">
     <div class="col-md-12 col-lg-8">
         <nz-card>
             <div class="d-flex justify-content-between align-items-center">
@@ -118,9 +118,9 @@
             </div>
         </nz-card>
     </div>
-</div>
+</div> -->
 <div class="row">
-    <div class="col-md-12 col-lg-4">
+    <!-- <div class="col-md-12 col-lg-4">
         <nz-card>
             <div class="d-flex justify-content-between align-items-center">
                 <div>
@@ -142,44 +142,37 @@
                 </canvas>
             </div>
         </nz-card>
-    </div>
-    <div class="col-md-12 col-lg-8">
+    </div> -->
+    <div class="col-md-12 col-lg-12">
         <nz-card>
             <div class="d-flex justify-content-between align-items-center">
-                <h5>Top Product</h5>
+                <h5>Top Tour</h5>
                 <div>
                     <a nz-button nzType="default" nzSize="small">View All</a>
                 </div>
             </div>
             <div class="m-t-30">
-                <nz-table #productTable [nzData]="productsList" [nzShowPagination]="false" class="no-border-last">
+                <nz-table #productTable [nzData]="topTours" [nzShowPagination]="false" class="no-border-last">
                     <thead>
                         <tr>
-                            <th>Product</th>
+                            <th>Tour</th>
                             <th>Orders</th>
-                            <th>Earning</th>
-                            <th>Stock Left</th>
+                            <th>Profit</th>
+                            <th>Customer</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of productTable.data">
+                        <tr *ngFor="let item of topTours">
                             <td>
                                 <div class="d-flex align-items-center">
-                                    <nz-avatar nzShape="square"  nzIcon="picture" [nzSrc]="item.avatar"></nz-avatar>
+                                    <nz-avatar nzShape="square"  nzIcon="picture" [nzSrc]="item.images[0].image"></nz-avatar>
                                     <span class="m-l-10">{{item.name}}</span>
                                 </div>
                             </td>
-                            <td>{{item.sales}}</td>
-                            <td>${{item.earn | number:'3.2-5'}}</td>
+                            <td>{{item.orderCount}}</td>
+                            <td>{{item.profit | number:'3.0-5'}}VND</td>
                             <td>
-                                <div class="d-flex align-items-center">
-                                    <div class="w-90 p-r-10">
-                                        <nz-progress *ngIf="item.stock > 60" [nzStrokeColor]="cyan" [nzPercent]="item.stock" nzSize="small" [nzShowInfo]="false"></nz-progress>
-                                        <nz-progress *ngIf="item.stock > 40 && item.stock < 60" [nzStrokeColor]="gold" [nzPercent]="item.stock" nzSize="small" [nzShowInfo]="false"></nz-progress>
-                                        <nz-progress *ngIf="item.stock < 40" [nzStrokeColor]="red" [nzPercent]="item.stock" nzSize="small" [nzShowInfo]="false"></nz-progress>
-                                    </div>
-                                    <span>{{item.stock}}</span>
-                                </div>
+                                {{item.customer}}
                             </td>
                         </tr>
                     </tbody>

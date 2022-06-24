@@ -46,8 +46,8 @@
                 <td>{{item.contactAddress}}</td>
                 <td>{{item.contactPhone}}</td>
                 <td>{{item.numberOfGuest}}</td>
-                <td>{{item.unitPrice}}</td>
-                <td>{{item.total}}</td>
+                <td>{{item.unitPrice | number:'3.0-5'}}VND</td>
+                <td>{{item.total | number:'3.0-5'}}VND</td>
                 <!-- <td>
                     <nz-badge *ngIf="item.status == 'approved'" nzStatus="success"></nz-badge>
                     <nz-badge *ngIf="item.status == 'rejected'" nzStatus="error"></nz-badge>

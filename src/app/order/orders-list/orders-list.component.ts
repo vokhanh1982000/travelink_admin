@@ -67,16 +67,16 @@ export class OrdersListComponent implements OnInit {
 
     ngOnInit(): void {
         this.getOrder()
-        console.log(this.displayData)
     }
 
     getOrder() {
         this.orderService.getOrder().subscribe({
           next:(res) =>  {
             this.displayData = res.content
+            console.log(this.displayData)
           },
           error:(err)=>{
-            alert("Error while fetching the Records")
+            // alert("Error while fetching the Records")
           }
         })
       }

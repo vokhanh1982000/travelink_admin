@@ -6,18 +6,10 @@ import { EcommerceDashboardComponent } from './e-commerce/e-commerce-dashboard.c
 
 const routes: Routes = [
     {
-        path: 'turnover',
+        path: '',
         component: DefaultDashboardComponent,
         data: {
-            title: 'Turnover',
-            headerDisplay: "none"
-        }
-    },
-    {
-        path: 'top-order',
-        component: EcommerceDashboardComponent,
-        data: {
-            title: 'Top Order',
+            title: 'Dashboard',
             headerDisplay: "none"
         }
     }
